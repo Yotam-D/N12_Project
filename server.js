@@ -19,19 +19,32 @@ app.listen (process.env.PORT, ()=>{
 })
 
 
-// axios
-// 	.get('https://www.reddit.com/r/programming.json')
-// 	.then((response) => {
-// 		console.log(response)
-// 	})
-// 	.catch((error) => {
-// 		console.error(error)
-// 	});
+const getPostTitles = async () => {
+	try {
+		const { data } = await axios.get(
+			'https://www.n12.co.il/'
+		);
+        // console.log(data);
+		const $ = cheerio.load(data);
+		const postTitles = [];
 
-const $ = cheerio.load('<h2 class="title">Hello world</h2>')
+		$('ul > li > p > strong').each((_idx, el) => {
+            // console.log(el);
+			const postTitle = reverseString($(el).text())
+            // const postDate;
+			postTitles.push(postTitle)
+		});
 
-$('h2.title').text('Hello there!')
-$('h2').addClass('welcome')
+		return postTitles;
+	} catch (error) {
+		throw error;
+	}
+};
 
-$.html()
-console.log($);
+getPostTitles()
+    .then((postTitles) => console.log(postTitles));
+
+function reverseString(string) {
+    return string.split("").reverse().join("").replace(/(\r\n|\n|\r|\t)/gm, "");
+};
+    // console.log(reverseInPlace("abd fhe kdj"))
