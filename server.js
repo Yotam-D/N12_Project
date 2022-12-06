@@ -49,28 +49,3 @@ function reverseString(string) {
     return string.split("").reverse().join("").replace(/(\r\n|\n|\r|\t)/gm, "");  //reverses the string, remove string operations
 };
 
-let mailOptions = {
-	from: 'd.yotam@gmail.com',
-	to: 'd.yotam@gmail.com',
-	subject: 'Email from Node-App: A Test Message!',
-	text: 'Some content to send',
-	html: '<b>The html content</b>'
-  };
-  
-  // Mail transport configuration
-  let transporter = nodemailer.createTransport({
-	service: 'gmail',
-	auth: {
-	  user: 'd.yotam@gmail.com',
-	  pass: process.env.PASS,
-	},
-	tls: {
-	  rejectUnauthorized: false,
-	},
-  });
-  
-  // Delivering mail with sendMail method
-//   transporter.sendMail(mailOptions, (error, info) => {
-// 	if (error) console.log(error);
-// 	else console.log('Email sent: ' + info.response);
-//   });
