@@ -73,7 +73,7 @@ async function Send() {
 	getPostTitles()
     .then((postTitles) => message.html = modules.createMessage(postTitles)) // insert the titles to the message html section
 	.then(console.log(message))
-	.then(Send()) 
+	// .then(Send()) 
 	.catch(console.error);
 
 	
