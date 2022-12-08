@@ -16,6 +16,7 @@ let message = {
 	text: "default text..", // plain text body
 	html: "<b>Hello world?</b>", // html body
   };
+const newsSite = 'https://www.n12.co.il';
 
   //Gets Oauth2 and credential for sending emails.
   const oAuth2Client = new googleapis.Auth.OAuth2Client(process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI)
@@ -23,17 +24,17 @@ let message = {
 
 const getPostTitles = async () => {
 	try {
-		const { data } = await axios.get(
-			'https://www.n12.co.il/'
-		);
+		const { data } = await axios.get(newsSite);
         // console.log(data);
 		const $ = cheerio.load(data);
 		const postTitles = [];
 
-		$('ul > li > p > strong').each((_idx, el) => {
+		$('ul > li > p > strong > a').each((_idx, el) => {
             // console.log(el);
-			const postTitle = modules.editString($(el).text())
-            // const postDate;
+			const postTitle = {
+							title : modules.editString($(el).text()), // gets the title text content
+							href : newsSite + $(el).attr('href') // gets the full address
+						}
 			postTitles.push(postTitle)
 		});
 		// console.log(postTitles);
@@ -70,9 +71,9 @@ async function Send() {
 	}
 	
 	getPostTitles()
-    .then((postTitles) => message.html = modules.createMessage(postTitles))
-	// .then(console.log(message))
-	// .then(Send())
+    .then((postTitles) => message.html = modules.createMessage(postTitles)) // insert the titles to the message html section
+	.then(console.log(message))
+	.then(Send()) 
 	.catch(console.error);
 
 	

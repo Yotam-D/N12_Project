@@ -3,8 +3,8 @@ const createMessage = (TitlesArray) => {
     let html = ``;
     // console.log(TitlesArray);
     TitlesArray.forEach((element,ind) => {
-        console.log(element);
-        html += `<h2 key=${ind}>${element}</h2><br></br> ` 
+        // console.log(element);
+        html += `<a key=${ind} href=${element.href} >${element.title}</a><br></br> ` 
     }); 
     console.log(html);
     return html;
