@@ -1,17 +1,15 @@
-//gets Titles Array and returns html with the Titles organized
+//gets Titles Array and returns html string with organized titles
 const createMessage = (TitlesArray) => {
-    let html = ``;
-    // console.log(TitlesArray);
+    let html = `<h1>חדשות היום:</h1> <br>`;
     TitlesArray.forEach((element,ind) => {
-        // console.log(element);
-        html += `<a key=${ind} href=${element.href} >${element.title}</a><br></br> ` 
+        html += `<a key=${ind} href=${element.href} >${element.title}</a><br></br><br></br> ` 
     }); 
-    console.log(html);
     return html;
 }
 
+//remove string operators from string
 const editString = (string) => {
-	return string.replace(/(\r\n|\n|\r|\t)/gm, "");  //remove string operations
+	return string.replace(/(\r\n|\n|\r|\t)/gm, "");  
 };
 
 
