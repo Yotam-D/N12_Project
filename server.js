@@ -55,7 +55,6 @@ app.post('/getmail', (req,res) =>{
 			.then((postTitles) => {
 				message.html = modules.createMessage(postTitles)
 				message.to = mailList.join(', ')
-				// console.log('send to', message)
 			}) 
 			// send email
 			.then(Send()) 
@@ -111,6 +110,18 @@ async function Send() {
 		.then((result) => console.log('email Sent..', result))
 		.catch(console.error);
 }
+
+//Schedule sending times
+// every sunday at 08:30 AM israel time-zone
+cron.schedule('30 8 * * *', () => { 
+	getPostTitles()
+	.then((postTitles) => message.html = modules.createMessage(postTitles)) 
+	.then(Send());
+	console.log('sending Titles..');
+  }, {
+	scheduled: true,
+	timezone: "Israel"
+  });
 	
 
 
