@@ -9,7 +9,7 @@ const setEmail = (event) => {
     setUserEmail(email.value);
 }
 
-// Send inserted email adress to the server and get status
+// Send inserted email adress to the server and gets status
 async function setUserEmail(emailAddress){
     await fetch(`${serverAddress}/getmail`, {  // env port
     method: 'POST', 
@@ -18,7 +18,6 @@ async function setUserEmail(emailAddress){
     })
     .then(response => response.json())
     .then(results => {
-        console.log('Server sent back', results)
         emailMessage.innerHTML = results.status
     })
     .catch((error) => {
