@@ -1,0 +1,17 @@
+.container{
+    height: 100vh;
+}
+
+.mainCointainer{
+    height: 100%;
+}
+
+.logo{
+   width:5rem;
+   height: auto;
+   border-radius: 20%;
+}
+
+h1{
+    font-family: 'Anton', sans-serif;
+}

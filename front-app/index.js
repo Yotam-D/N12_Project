@@ -1,6 +1,6 @@
 let userEmail = {email : ""};
 let emailMessage = document.getElementById('emailstat');
-const serverAddress = `http://localhost:${process.env.PORT}`;//to change if sever address changes 
+const serverAddress = `http://localhost:5000`;//to change if sever address changes 
 
 //handle click on Subscribe
 const setEmail = (event) => {
@@ -22,6 +22,7 @@ async function setUserEmail(emailAddress){
         emailMessage.innerHTML = results.status
     })
     .catch((error) => {
-    console.error('Error:', error);
+        console.error('Error:', error);
+        emailMessage.innerHTML = `couldn't connect to the server, try again later... `
     });
 }
